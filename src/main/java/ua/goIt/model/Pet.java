@@ -57,8 +57,9 @@ public class Pet {
     public void setStatus(String status) {
         this.status = status;
     }
+public  Pet(){};
 
-    public Pet() {
+    public Pet(Long id, Category category, String name, String[] photoUrls, Tag[] tags, String status) {
         this.id = id;
         this.category = category;
         this.name = name;

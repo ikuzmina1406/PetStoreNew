@@ -2,8 +2,8 @@ package ua.goIt.model;
 
 public class Order {
     private Long id;
-    private long petId;
-    private long quantity;
+    private Long petId;
+    private Long quantity;
     private String shipDate;
     private String status;
     private boolean complete;
@@ -20,7 +20,7 @@ public class Order {
         return petId;
     }
 
-    public void setPetId(long petId) {
+    public void setPetId(Long petId) {
         this.petId = petId;
     }
 
@@ -28,7 +28,7 @@ public class Order {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
@@ -55,8 +55,9 @@ public class Order {
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
+public  Order(){};
 
-    public Order(Long id, long petId, long quantity, String shipDate, String status, boolean complete) {
+    public Order(Long id, Long petId, Long quantity, String shipDate, String status, boolean complete) {
         this.id = id;
         this.petId = petId;
         this.quantity = quantity;

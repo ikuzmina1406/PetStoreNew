@@ -7,7 +7,7 @@ import ua.goIt.model.ApiResponse;
 import ua.goIt.model.Category;
 import ua.goIt.model.Pet;
 import ua.goIt.model.Tag;
-import ua.goIt.model.controller.PetController;
+import ua.goIt.controller.PetController;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,8 +22,7 @@ public class PetCommands implements Commands {
     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private final String URL_NAME = "https://petstore.swagger.io/v2/pet";
     private final List<String> commands = Arrays.asList("\"getPetById\"", "\"getPetsByStatus\"", "\"deletePetById\"",
-            "\"updatePet\"", "\"createPet\"", "\"updatePetsStatus\"");
-
+            "\"updatePet\"", "\"createPet\"", "\"updatePetsStatus\", \"postUploadImage\"");
 
     @Override
     public void handle(String param, Consumer<Commands> consumer) throws IOException, InterruptedException {
@@ -48,6 +47,8 @@ public class PetCommands implements Commands {
             case "updatepetsstatus":
                 updatePetsStatus(newParam);
                 return;
+            case "postuploadimage":
+                postUploadImage(newParam);
         }
 
     }
@@ -138,7 +139,19 @@ public class PetCommands implements Commands {
         }
         System.out.println(GSON.toJson(petById));
     }
-
+    private void postUploadImage(String param) throws IOException, InterruptedException {
+        String[] words = param.split(" ");
+        if (words.length != 3) {
+            System.out.println("our input could not be processed, try again .");
+            return;
+        }
+        ApiResponse apiResponse = petController.postUploadImage(URL_NAME, param);
+        if (apiResponse.getCode() != 200) {
+            System.out.println("our input could not be processed, try again .");
+            return;
+        }
+        System.out.println(GSON.toJson(apiResponse));
+    }
 
     @Override
     public void printInstruction() {
@@ -150,13 +163,15 @@ public class PetCommands implements Commands {
                 "deletePetById (id - the pet you want to delete). For example: deletePetById 1");
         System.out.println("If you will choice \"updatePet\" enter with a space: " +
                 "updatePet (id - the pet you want to change ) name categoryId categoryName petStatus photoUrl tagId tagName" +
-                "\n For example: updatePet 1 Max 1 dog available https://krasivosti.pro/sobaki/10852-labrador-chernyj-devochka.html 1 sweet");
+                "\n For example: updatePet 1 Terry 1 dog available https://krasivosti.pro/sobaki/10852-labrador-chernyj-devochka.html 1 sweet");
         System.out.println("If you will choice \"createPet\" enter with a space: " +
                 "createPet (id - the pet you want to create) name categoryId categoryName petStatus photoUrl tagId tagName" +
-                "\nFor example: createPet 1 Max 1 dog available https://obyava.ua/ru/shchenki-labradora-v-kieve-ot-krasivoy-pary-pitomnik-1702407.html 1 sweet");
+                "\nFor example: createPet 1 Terry 1 dog available https://obyava.ua/ru/shchenki-labradora-v-kieve-ot-krasivoy-pary-pitomnik-1702407.html 1 sweet");
         System.out.println("If you will choice \"updatePetsStatus\"  enter with a space: " +
                 "updatePetsStatus (id - the pet you want to update) name petStatus" +
                 " For example: updatePetsStatus 1 Max available");
-
+        System.out.println("If you will choice \"postUploadImage\"  enter with a space: " +
+                "postUploadImage (id - the pet you want to download the file)" +
+                "  For example: postUploadImage 1 MyFavourite https://focusedcollection.com/ru/309807082/stock-photo-black-labrador-puppy-looking-camera.html");
     }
 }

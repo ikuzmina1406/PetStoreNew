@@ -23,7 +23,7 @@ public class Command {
             switch (group) {
 
                 case "start":
-
+                    System.out.println("Hello, you are at the `PetStore`!");
                 case "main":
                     activeCommand = commands;
                     activeCommand.printInstruction();
@@ -35,8 +35,8 @@ public class Command {
                     return;
 
                 default:
-                    activeCommand.handle(params, iCommands1 -> {
-                        activeCommand = iCommands1;
+                    activeCommand.handle(params, commands1 -> {
+                        activeCommand = commands1;
                         activeCommand.printInstruction();
                     });
 

@@ -1,5 +1,7 @@
 package ua.goIt.model;
 
+import ua.goIt.commands.entitiesCommands.UserCommands;
+
 public class User {
     private Long id;
     private String username;
@@ -73,6 +75,7 @@ public class User {
     public void setUserStatus(int userStatus) {
         this.userStatus = userStatus;
     }
+public User(){};
 
     public User(Long id, String username, String firstName, String lastName, String email, String password, String phone, int userStatus) {
         this.id = id;

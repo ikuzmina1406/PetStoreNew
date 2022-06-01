@@ -1,7 +1,9 @@
 package ua.goIt.commands;
 
 
+import ua.goIt.commands.entitiesCommands.OrderCommands;
 import ua.goIt.commands.entitiesCommands.PetCommands;
+import ua.goIt.commands.entitiesCommands.UserCommands;
 
 import java.io.IOException;
 import java.util.Map;
@@ -11,8 +13,10 @@ import java.util.function.Consumer;
 public class MainMenu implements Commands {
 
     private final Map<String, Commands> commandsMap = Map.of(
-            "pet", new PetCommands()
-            );
+            "pet", new PetCommands(),
+            "store", new OrderCommands(),
+            "user", new UserCommands()
+    );
 
 
     @Override
@@ -33,7 +37,7 @@ public class MainMenu implements Commands {
 
     @Override
     public void printInstruction() {
-        System.out.println("Hello, you are at the `PetStore`. Enter one of the entities, please," +
+        System.out.println(" Enter one of the entities, please," +
                 " - [\"pet\", \"store\", \"user\"]");
     }
 }
