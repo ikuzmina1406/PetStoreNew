@@ -88,7 +88,7 @@ public class UserController {
                 .DELETE()
                 .build();
         HttpResponse<String> send = HTTP_CLIENT.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-        return GSON.fromJson(send.body(),ApiResponse.class);
+        return GSON.fromJson(send.body(), ApiResponse.class);
 
     }
 }

@@ -15,7 +15,7 @@ public class OrderController {
     private final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    public String getStoreInventory(String url,String param) throws IOException, InterruptedException {
+    public String getStoreInventory(String url, String param) throws IOException, InterruptedException {
         String newUrl = url + "/" + param;
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(newUrl))
@@ -24,6 +24,7 @@ public class OrderController {
         HttpResponse<String> send = HTTP_CLIENT.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         return send.body();
     }
+
     public Order getOrderByPetsId(String url, String param) throws IOException, InterruptedException {
         String newUrl = url + "/order/" + param;
         HttpRequest httpRequest = HttpRequest.newBuilder()
@@ -32,6 +33,7 @@ public class OrderController {
         HttpResponse<String> send = HTTP_CLIENT.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         return GSON.fromJson(send.body(), Order.class);
     }
+
     public Order placeAnOrderForAPet(String url, Order order) throws IOException, InterruptedException {
         String newUrl = url + "/order";
         String requestBody = GSON.toJson(order);
@@ -43,6 +45,7 @@ public class OrderController {
         HttpResponse<String> send = HTTP_CLIENT.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         return GSON.fromJson(send.body(), Order.class);
     }
+
     public ApiResponse deleteOrderById(String url, String param) throws IOException, InterruptedException {
         String newUrl = url + "/order/" + param;
         HttpRequest httpRequest = HttpRequest.newBuilder()
@@ -50,7 +53,7 @@ public class OrderController {
                 .DELETE()
                 .build();
         HttpResponse<String> send = HTTP_CLIENT.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-        return GSON.fromJson(send.body(),ApiResponse.class);
+        return GSON.fromJson(send.body(), ApiResponse.class);
 
     }
 }

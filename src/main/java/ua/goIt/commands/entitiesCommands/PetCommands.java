@@ -139,6 +139,7 @@ public class PetCommands implements Commands {
         }
         System.out.println(GSON.toJson(petById));
     }
+
     private void postUploadImage(String param) throws IOException, InterruptedException {
         String[] words = param.split(" ");
         if (words.length != 3) {

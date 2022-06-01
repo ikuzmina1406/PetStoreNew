@@ -55,7 +55,11 @@ public class Order {
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
-public  Order(){};
+
+    public Order() {
+    }
+
+    ;
 
     public Order(Long id, Long petId, Long quantity, String shipDate, String status, boolean complete) {
         this.id = id;
